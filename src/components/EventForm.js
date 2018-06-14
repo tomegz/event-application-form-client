@@ -1,28 +1,13 @@
 import React from 'react';
-import Calendar from 'react-calendar';
-
-class DatePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(date) {
-    this.props.setDate(date);
-  }
-  render() {
-    return (
-      <div className="react-calendar-wrapper">
-        <Calendar locale="en-EN" onChange={this.handleChange} />
-      </div>
-    );
-  }
-} 
+import DatePicker from './DatePicker';
+import Loading from './Loading';
 
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       calendarVisible: false,
+      loading: false,
       firstName: "",
       lastName: "",
       email: "",
@@ -37,6 +22,7 @@ class EventForm extends React.Component {
     this.hideCalendar = this.hideCalendar.bind(this);
     this.setDate = this.setDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   showCalendar() {
     this.setState(() => {
@@ -78,11 +64,19 @@ class EventForm extends React.Component {
       }
     });
   }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState(() => {
+      return {
+        loading: true
+      }
+    })
+  }
   render() {
     const { day, month, year } = this.state.eventDate;
     const eventDate = day ? `${day}/${month}/${year}` : "";
     return (
-      <form className="event-form">
+      <form className="event-form" onSubmit={this.handleSubmit}>
         <h3>Event application form</h3>
         <label htmlFor="firstName">First Name:</label>
         <input type="text" name="firstName" required placeholder="John" onChange={this.handleChange} />
@@ -98,7 +92,9 @@ class EventForm extends React.Component {
           placeholder="DD/MM/YYYY" 
           value={eventDate}
           onFocus={this.showCalendar} />
-        <button className="event-button" type="submit">Submit</button>
+        {this.state.loading 
+          ? <Loading /> 
+          : <button className="event-button" type="submit">Submit</button>}
       </form>
     );
   }
