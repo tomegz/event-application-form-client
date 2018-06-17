@@ -1,6 +1,6 @@
 import * as actions from "../actions/actionCreators";
 
-describe("actions", () => {
+describe("action creators", () => {
   it("should create an action to add flash message", () => {
     const message = { text: "Invalid email", type: "error" };
     const expectedAction = {
