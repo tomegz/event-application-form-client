@@ -3,7 +3,7 @@ import Alert from "./Alert";
 import { connect } from "react-redux";
 import { removeMessage } from "../actions/actionCreators";
 
-class FlashMessages extends React.Component {
+export class FlashMessages extends React.Component {
   render() {
     return (
       <div>

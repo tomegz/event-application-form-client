@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`event form - snaphot renders correctly 1`] = `
+<form
+  className="event-form"
+  onSubmit={[Function]}
+>
+  <h3>
+    Event application form
+  </h3>
+  <label
+    htmlFor="firstName"
+  >
+    First Name:
+  </label>
+  <input
+    name="firstName"
+    onChange={[Function]}
+    placeholder="John"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label
+    htmlFor="lastName"
+  >
+    Last Name:
+  </label>
+  <input
+    name="lastName"
+    onChange={[Function]}
+    placeholder="Doe"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label
+    htmlFor="email"
+  >
+    Email Address:
+  </label>
+  <input
+    name="email"
+    onChange={[Function]}
+    placeholder="johndoe@example.com"
+    required={true}
+    type="email"
+    value=""
+  />
+  <label
+    htmlFor="date"
+  >
+    Event's date:
+  </label>
+  
+  <input
+    name="eventDate"
+    onFocus={[Function]}
+    placeholder="DD/MM/YYYY"
+    required={true}
+    type="text"
+    value=""
+  />
+  <button
+    className="event-button"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;

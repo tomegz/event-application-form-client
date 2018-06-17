@@ -11,7 +11,7 @@ describe("fields reducer", () => {
   });
   it("should handle RESET_FIELDS", () => {
     const action = { type: "RESET_FIELDS" };
-    expect(fields(defaultState, action)).toEqual({ ...defaultState });
+    expect(fields(defaultState, action)).toEqual(defaultState);
   });
 });
 

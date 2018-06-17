@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flash messages - snaphot renders correctly 1`] = `
+<div>
+  <div
+    className="alert alert-error"
+  >
+    Please provide first name
+    <button
+      className="btn-close alert-error"
+      onClick={[Function]}
+    >
+      ×
+    </button>
+  </div>
+  <div
+    className="alert alert-error"
+  >
+    Please provide last name
+    <button
+      className="btn-close alert-error"
+      onClick={[Function]}
+    >
+      ×
+    </button>
+  </div>
+</div>
+`;

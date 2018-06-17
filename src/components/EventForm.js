@@ -7,7 +7,7 @@ import shortid from "shortid";
 import { connect } from "react-redux";
 import { addMessage, updateField, resetFields } from "../actions/actionCreators";
 
-class EventForm extends React.Component {
+export class EventForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
