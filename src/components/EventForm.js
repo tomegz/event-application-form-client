@@ -21,25 +21,19 @@ export class EventForm extends React.Component {
     this.clearForm = this.clearForm.bind(this);
   }
   showCalendar() {
-    this.setState(() => {
-      return {
-        calendarVisible: true
-      }
-    });
+    this.setState(() => ({
+      calendarVisible: true
+    }));
   }
   hideCalendar() {
-    this.setState(() => {
-      return {
-        calendarVisible: false
-      }
-    });
+    this.setState(() => ({
+      calendarVisible: false
+    }));
   }
   clearForm() {
-    this.setState(() => {
-      return {
+    this.setState(() => ({
         loading: false
-      };
-    })
+    }));
     this.props.resetFields();
   }
   setDate(date) {
@@ -54,11 +48,9 @@ export class EventForm extends React.Component {
       day
     }
     this.props.updateField("eventDate", eventDate);
-    this.setState(() => {
-      return {
-        calendarVisible: false
-      }
-    });
+    this.setState(() => ({
+      calendarVisible: false
+    }));
   }
   handleChange(e) {
     const { name, value } = e.target;
@@ -68,11 +60,9 @@ export class EventForm extends React.Component {
     const { firstName, lastName, email } = this.props.fields;
     const eventDate = this.props.fields.eventDate.timestamp;
     const data = { firstName, lastName, email, eventDate };
-    this.setState(() => {
-      return {
-        loading: true
-      }
-    });
+    this.setState(() => ({
+      loading: true
+    }));
     postEvent('/events', data)
       .then(res => {
         res.messages.forEach(message => this.props.addMessage({ ...message, id: shortid.generate() }));
