@@ -1,6 +1,8 @@
 import React from 'react';
 import DatePicker from './DatePicker';
 import Loading from './Loading';
+import postEvent from '../utils/api';
+import shortid from 'shortid';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -65,11 +67,20 @@ class EventForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+    const { firstName, lastName, email } = this.state;
+    const eventDate = this.state.eventDate.timestamp;
+    const data = { firstName, lastName, email, eventDate };
     this.setState(() => {
       return {
         loading: true
       }
     });
+    postEvent('/events', data)
+      .then(res => {
+        res.messages.forEach(message => this.props.addFlashMessage({ ...message, id: shortid.generate() }));
+        this.setState(() => ({ loading: false }));
+      }) 
+      .catch(error => console.error(error));
   }
   render() {
     const { day, month, year } = this.state.eventDate;

@@ -7,8 +7,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      messages: [{ id: 1, text: "Successfully created event", type: "success"}, 
-      { id: 2, text: "Invalid email address", type: "error"}]
+      messages: []
     }
     this.addMessage = this.addMessage.bind(this);
     this.removeMessage = this.removeMessage.bind(this);
