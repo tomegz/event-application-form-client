@@ -54,7 +54,6 @@ class EventForm extends React.Component {
         }
       }
     });
-    console.log(this.state);
   }
   handleChange(e) {
     const { name, value } = e.target;
@@ -70,7 +69,7 @@ class EventForm extends React.Component {
       return {
         loading: true
       }
-    })
+    });
   }
   render() {
     const { day, month, year } = this.state.eventDate;
