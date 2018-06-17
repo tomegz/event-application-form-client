@@ -10,9 +10,10 @@ class DatePicker extends React.Component {
     this.props.setDate(date);
   }
   render() {
+    const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
     return (
       <div className="react-calendar-wrapper">
-        <Calendar locale="en-EN" onChange={this.handleChange} />
+        <Calendar locale="en-EN" onChange={this.handleChange} minDate={tomorrow} />
       </div>
     );
   }
