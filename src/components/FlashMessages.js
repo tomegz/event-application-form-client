@@ -1,5 +1,7 @@
-import React from 'react';
-import Alert from './Alert';
+import React from "react";
+import Alert from "./Alert";
+import { connect } from "react-redux";
+import { removeMessage } from "../actions/actionCreators";
 
 class FlashMessages extends React.Component {
   render() {
@@ -10,7 +12,7 @@ class FlashMessages extends React.Component {
             <Alert 
               key={message.id} 
               message={message} 
-              onClose={() => this.props.removeMessage(message)} 
+              onClose={() => this.props.removeMessage(message.id)} 
             />
           );
         })}
@@ -19,4 +21,10 @@ class FlashMessages extends React.Component {
   }
 }
 
-export default FlashMessages;
+const mapStateToProps = state => {
+  return {
+    messages: state.messages
+  }
+}
+
+export default connect(mapStateToProps, { removeMessage })(FlashMessages);

@@ -1,5 +1,5 @@
-import React from 'react';
-import Calendar from 'react-calendar';
+import React from "react";
+import Calendar from "react-calendar";
 
 class DatePicker extends React.Component {
   constructor(props) {

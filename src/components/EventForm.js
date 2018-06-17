@@ -1,30 +1,25 @@
-import React from 'react';
-import DatePicker from './DatePicker';
-import Loading from './Loading';
-import postEvent from '../utils/api';
-import shortid from 'shortid';
+import React from "react";
+import DatePicker from "./DatePicker";
+import Loading from "./Loading";
+import postEvent from "../utils/api";
+import shortid from "shortid";
+
+import { connect } from "react-redux";
+import { addMessage, updateField, resetFields } from "../actions/actionCreators";
 
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       calendarVisible: false,
-      loading: false,
-      firstName: "",
-      lastName: "",
-      email: "",
-      eventDate: {
-        timestamp: null,
-        year: null,
-        month: null,
-        day: null
-      }
+      loading: false
     }
     this.showCalendar = this.showCalendar.bind(this);
     this.hideCalendar = this.hideCalendar.bind(this);
     this.setDate = this.setDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
   showCalendar() {
     this.setState(() => {
@@ -40,35 +35,39 @@ class EventForm extends React.Component {
       }
     });
   }
+  clearForm() {
+    this.setState(() => {
+      return {
+        loading: false
+      };
+    })
+    this.props.resetFields();
+  }
   setDate(date) {
     const timestamp = date.getTime();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
+    const eventDate = {
+      timestamp,
+      year,
+      month,
+      day
+    }
+    this.props.updateField("eventDate", eventDate);
     this.setState(() => {
       return {
-        calendarVisible: false,
-        eventDate: {
-          timestamp,
-          year,
-          month,
-          day
-        }
+        calendarVisible: false
       }
     });
   }
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState(() => {
-      return {
-        [name]: value
-      }
-    });
+    this.props.updateField(name, value);
   }
   handleSubmit(e) {
-    e.preventDefault();
-    const { firstName, lastName, email } = this.state;
-    const eventDate = this.state.eventDate.timestamp;
+    const { firstName, lastName, email } = this.props.fields;
+    const eventDate = this.props.fields.eventDate.timestamp;
     const data = { firstName, lastName, email, eventDate };
     this.setState(() => {
       return {
@@ -77,23 +76,25 @@ class EventForm extends React.Component {
     });
     postEvent('/events', data)
       .then(res => {
-        res.messages.forEach(message => this.props.addFlashMessage({ ...message, id: shortid.generate() }));
-        this.setState(() => ({ loading: false }));
+        res.messages.forEach(message => this.props.addMessage({ ...message, id: shortid.generate() }));
+        this.clearForm();
       }) 
       .catch(error => console.error(error));
+    e.preventDefault();
   }
   render() {
-    const { day, month, year } = this.state.eventDate;
+    const { firstName, lastName, email } = this.props.fields;
+    const { day, month, year } = this.props.fields.eventDate;
     const eventDate = day ? `${day}/${month}/${year}` : "";
     return (
       <form className="event-form" onSubmit={this.handleSubmit}>
         <h3>Event application form</h3>
         <label htmlFor="firstName">First Name:</label>
-        <input type="text" name="firstName" required placeholder="John" onChange={this.handleChange} />
+        <input type="text" name="firstName" required placeholder="John" onChange={this.handleChange}  value={firstName}/>
         <label htmlFor="lastName">Last Name:</label>
-        <input type="text" name="lastName" required placeholder="Doe" onChange={this.handleChange}/>
+        <input type="text" name="lastName" required placeholder="Doe" onChange={this.handleChange} value={lastName}/>
         <label htmlFor="email">Email Address:</label>
-        <input type="email" name="email" required placeholder="johndoe@example.com" onChange={this.handleChange}/>
+        <input type="email" name="email" required placeholder="johndoe@example.com" onChange={this.handleChange} value={email}/>
         <label htmlFor="date">Event's date:</label>
         {this.state.calendarVisible 
           ? <DatePicker setDate={this.setDate} hideCalendar={this.hideCalendar} /> 
@@ -110,4 +111,10 @@ class EventForm extends React.Component {
   }
 }
 
-export default EventForm;
+const mapStateToProps = state => {
+  return {
+    fields: state.fields
+  }
+}
+
+export default connect(mapStateToProps, { addMessage, updateField, resetFields })(EventForm);
