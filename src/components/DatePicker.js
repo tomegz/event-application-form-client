@@ -1,5 +1,6 @@
 import React from "react";
 import Calendar from "react-calendar";
+import PropTypes from "prop-types";
 
 class DatePicker extends React.Component {
   constructor(props) {
@@ -18,5 +19,9 @@ class DatePicker extends React.Component {
     );
   }
 } 
+
+DatePicker.propTypes = {
+  setDate: PropTypes.func.isRequired
+}
 
 export default DatePicker;

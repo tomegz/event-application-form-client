@@ -29,7 +29,11 @@ class Alert extends React.Component {
 Alert.propTypes = {
   onClose: PropTypes.func,
   timeout: PropTypes.number,
-  message: PropTypes.object.isRequired
+  message: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  }).isRequired
 };
 
 Alert.defaultProps = {

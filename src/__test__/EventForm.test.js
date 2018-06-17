@@ -5,7 +5,14 @@ import { defaultState } from "../reducers/fieldsReducer";
 
 describe("event form - snaphot", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<EventForm fields={defaultState}/>).toJSON();
+    const el = (
+      <EventForm 
+        fields={defaultState}
+        addMessage={() => ""} // would fail on prop-types check without passing a function
+        updateField={() => ""}
+        resetFields={() => ""} />
+    );
+    const tree = renderer.create(el).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

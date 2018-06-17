@@ -5,6 +5,7 @@ import postEvent from "../utils/api";
 import shortid from "shortid";
 import { connect } from "react-redux";
 import { addMessage, updateField, resetFields } from "../actions/actionCreators";
+import PropTypes from "prop-types";
 
 export class EventForm extends React.Component {
   constructor(props) {
@@ -100,6 +101,23 @@ export class EventForm extends React.Component {
       </form>
     );
   }
+}
+
+EventForm.propTypes = {
+  addMessage: PropTypes.func.isRequired,
+  updateField: PropTypes.func.isRequired,
+  resetFields: PropTypes.func.isRequired,
+  fields: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    eventDate: PropTypes.shape({
+      timestamp: PropTypes.string,
+      year: PropTypes.string,
+      month: PropTypes.string,
+      day: PropTypes.string
+    }).isRequired
+  }).isRequired
 }
 
 const mapStateToProps = state => {
