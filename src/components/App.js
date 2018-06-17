@@ -3,7 +3,7 @@ import EventForm from "./EventForm";
 import FlashMessages from "./FlashMessages";
 
 const App = () => (
-  <div className='app'>
+  <div className="app">
     <FlashMessages />
     <EventForm />
   </div>

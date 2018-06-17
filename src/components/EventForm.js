@@ -3,7 +3,6 @@ import DatePicker from "./DatePicker";
 import Loading from "./Loading";
 import postEvent from "../utils/api";
 import shortid from "shortid";
-
 import { connect } from "react-redux";
 import { addMessage, updateField, resetFields } from "../actions/actionCreators";
 

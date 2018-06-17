@@ -1,6 +1,6 @@
 import React from "react";
-import { EventForm } from "../components/EventForm";
 import renderer from "react-test-renderer";
+import { EventForm } from "../components/EventForm";
 import { defaultState } from "../reducers/fieldsReducer";
 
 describe("event form - snaphot", () => {

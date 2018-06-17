@@ -1,6 +1,6 @@
 import React from "react";
-import { FlashMessages } from "../components/FlashMessages";
 import renderer from "react-test-renderer";
+import { FlashMessages } from "../components/FlashMessages";
 
 describe("flash messages - snaphot", () => {
   it("renders correctly", () => {
