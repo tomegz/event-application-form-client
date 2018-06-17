@@ -187,3 +187,16 @@ body {
 .btn-close:hover {
   font-weight: 500;
 }
+
+/* MEDIA QUERIES */
+
+@media (max-width: 400px) {
+  .event-form {
+    width: 90%;
+    padding: 20px;
+    font-size: 80%;
+  }
+  .event-form button {
+    width: 60%;
+  }
+}

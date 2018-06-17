@@ -79,7 +79,9 @@ export class EventForm extends React.Component {
         res.messages.forEach(message => this.props.addMessage({ ...message, id: shortid.generate() }));
         this.clearForm();
       }) 
-      .catch(error => console.error(error));
+      .catch(error => {
+        return this.props.addMessage({ type: "error", text: "Something went wrong", id: shortid.generate() });
+      });
     e.preventDefault();
   }
   render() {
