@@ -1,4 +1,4 @@
-const url = "https://event-application-form-api-iresqcazdu.now.sh";
+const url = "https://event-application-form-api-mqhmawyxtg.now.sh";
 
 const postEvent = (route, data) => {
   return fetch(`${url}${route}`, {
